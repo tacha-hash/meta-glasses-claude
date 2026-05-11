@@ -1,8 +1,16 @@
-# Meta Rayban Glasses + Gemini Integration Project
+# Meta Ray-Ban (Display) Glasses + Claude Integration Project
 
-This project integrates the Meta Rayban Glasses with a WhatsApp bot, leveraging the power of Google Gemini, Redis for
-data management, Notion for note-taking, and Google Calendar for event and reminder management. This README guides you
-through setting up the project environment, including necessary configurations and API integrations.
+This project integrates the Meta Ray-Ban / Ray-Ban Display glasses with a WhatsApp bot, leveraging Anthropic Claude
+(via the official Anthropic SDK with tool_use), Redis for data management, Notion for note-taking, and Google Calendar
+for event and reminder management.
+
+**Why WhatsApp?** Meta's Wearables Device Access Toolkit (DAT) does NOT expose the Display HUD. The only way to push
+text onto the HUD today is through Meta-owned notification channels (WhatsApp, Messenger, iMessage, Calendar). By
+binding Claude to a WhatsApp number, every message sent from the glasses ("Hey Meta, send a message to Claude ...")
+becomes a Claude prompt, and Claude's reply appears on the HUD as an incoming WhatsApp notification.
+
+Forked from [josancamon19/meta-glasses-gemini](https://github.com/josancamon19/meta-glasses-gemini) — Gemini swapped
+for Claude. Default model: `claude-opus-4-7`.
 
 ## Getting Started
 
@@ -37,7 +45,8 @@ WHATSAPP_WEBHOOK_VERIFICATION_TOKEN=
 REDIS_DB_HOST=
 REDIS_DB_PORT=
 REDIS_DB_PASSWORD=
-GEMINI_API_KEY=
+ANTHROPIC_API_KEY=
+CLAUDE_MODEL=claude-opus-4-7
 CLOUD_STORAGE_BUCKET_NAME=
 NOTION_INTEGRATION_SECRET=
 NOTION_DATABASE_ID=
@@ -53,7 +62,8 @@ OAUTH_CREDENTIALS_ENCODED=
   dashboard to verify the webhook.
 - `REDIS_DB_HOST`, `REDIS_DB_PORT`, `REDIS_DB_PASSWORD`: Credentials for your Redis database. This project uses Redis
   for managing data, including storing images for analysis.
-- `GEMINI_API_KEY`: Obtain this from the Google Gemini API for image analysis and AI capabilities.
+- `ANTHROPIC_API_KEY`: Obtain this from [console.anthropic.com](https://console.anthropic.com/) — used for chat, image analysis, and tool_use.
+- `CLAUDE_MODEL`: (Optional) Override the default Claude model. Defaults to `claude-opus-4-7`.
 - `CLOUD_STORAGE_BUCKET_NAME`: The name of your Google Cloud Storage bucket for storing images and data.
 - `NOTION_INTEGRATION_SECRET`, `NOTION_DATABASE_ID`: Create a Notion integration and a database with fields (Title,
   Category, Content, Created At, Completed). Share the database with the integration.

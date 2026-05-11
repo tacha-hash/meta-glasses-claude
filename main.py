@@ -7,7 +7,7 @@ from functionality.image import logic_for_prompt_before_image, retrieve_calories
 from functionality.notion_ import *
 from functionality.search import *
 from utils.whatsapp import send_whatsapp_threaded
-from utils.gemini import *
+from utils.claude import *
 
 app = FastAPI()
 ok = {'status': 'Ok'}
