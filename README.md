@@ -12,6 +12,9 @@ becomes a Claude prompt, and Claude's reply appears on the HUD as an incoming Wh
 Forked from [josancamon19/meta-glasses-gemini](https://github.com/josancamon19/meta-glasses-gemini) — Gemini swapped
 for Claude. Default model: `claude-opus-4-7`.
 
+**Auth**: Uses the local `claude` CLI (Claude Code) via subprocess — no API key needed. Just `claude login` once
+with your Claude Max account and the bot inherits your subscription.
+
 ## Getting Started
 
 ### Prerequisites
@@ -45,8 +48,9 @@ WHATSAPP_WEBHOOK_VERIFICATION_TOKEN=
 REDIS_DB_HOST=
 REDIS_DB_PORT=
 REDIS_DB_PASSWORD=
-ANTHROPIC_API_KEY=
 CLAUDE_MODEL=claude-opus-4-7
+CLAUDE_CLI=claude
+CLAUDE_CWD=/tmp
 CLOUD_STORAGE_BUCKET_NAME=
 NOTION_INTEGRATION_SECRET=
 NOTION_DATABASE_ID=
@@ -62,8 +66,11 @@ OAUTH_CREDENTIALS_ENCODED=
   dashboard to verify the webhook.
 - `REDIS_DB_HOST`, `REDIS_DB_PORT`, `REDIS_DB_PASSWORD`: Credentials for your Redis database. This project uses Redis
   for managing data, including storing images for analysis.
-- `ANTHROPIC_API_KEY`: Obtain this from [console.anthropic.com](https://console.anthropic.com/) — used for chat, image analysis, and tool_use.
 - `CLAUDE_MODEL`: (Optional) Override the default Claude model. Defaults to `claude-opus-4-7`.
+- `CLAUDE_CLI`: (Optional) Path to the `claude` binary. Defaults to `claude` (assumed on PATH).
+- `CLAUDE_CWD`: (Optional) Working directory for the `claude` subprocess. Defaults to `/tmp` so the bot does NOT inherit any project `CLAUDE.md` / MCP config.
+
+Make sure you've run `claude login` once with your Claude Max account on the machine running this bot.
 - `CLOUD_STORAGE_BUCKET_NAME`: The name of your Google Cloud Storage bucket for storing images and data.
 - `NOTION_INTEGRATION_SECRET`, `NOTION_DATABASE_ID`: Create a Notion integration and a database with fields (Title,
   Category, Content, Created At, Completed). Share the database with the integration.
